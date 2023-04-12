@@ -22,5 +22,15 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        final TextView txt1=findViewById(R.id.forgotpass);
+        txt1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(MainActivity.this,ForgotPass.class);
+                startActivity(intent);
+
+            }
+        });
+
     }
 }
