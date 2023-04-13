@@ -30,13 +30,12 @@ public class UserPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_page);
-        final Button button = findViewById(R.id.LogOutbtn);
-        button.setOnClickListener(new View.OnClickListener() {
+        final Button settingsbutton = findViewById(R.id.settingsBtn);
+        settingsbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(UserPage.this, MainActivity.class);
+                Intent intent = new Intent(UserPage.this, Settings.class);
                 startActivity(intent);
-
             }
         });
 

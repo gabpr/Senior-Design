@@ -72,9 +72,9 @@
     <com.google.android.material.button.MaterialButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/LogOutbtn"
+        android:id="@+id/settingsBtn"
         android:layout_below="@+id/Minutes"
-        android:text="Log Out"
+        android:text="Settings"
         android:textColor="@color/white"
         android:backgroundTint="@color/purple_200"
         android:layout_centerHorizontal="true"/>
