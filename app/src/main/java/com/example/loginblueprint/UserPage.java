@@ -1,5 +1,7 @@
 package com.example.loginblueprint;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -7,7 +9,9 @@ import com.google.gson.annotations.SerializedName;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import org.json.JSONObject;
@@ -18,7 +22,7 @@ import java.util.List;
 import okhttp3.Response;
 
 public class UserPage extends AppCompatActivity {
-  private static final String TAG = "UserPage";
+    private static final String TAG = "UserPage";
     private LastFmService lastFmService;
     private ListView listView;
 
@@ -26,10 +30,21 @@ public class UserPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_page);
+        final Button button = findViewById(R.id.LogOutbtn);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(UserPage.this, MainActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
 
         lastFmService = new LastFmService();
-        listView = findViewById(R.id.user);
 
+        //listView = findViewById(R.id.user);
+        /*
         new Thread(() -> {
             try {
                 LastFmService.TopTracksResponse topTracksResponse = LastFmService.getTopTracks("your_lastfm_username_here");
@@ -47,5 +62,7 @@ public class UserPage extends AppCompatActivity {
                 Log.e(TAG, "Error getting top tracks", e);
             }
         }).start();
+
+         */
     }
 }

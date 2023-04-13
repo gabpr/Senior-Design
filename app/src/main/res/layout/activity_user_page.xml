@@ -22,15 +22,64 @@
         android:textSize="35dp"
         android:textStyle="bold" />
     <TextView
-        android:id="@+id/data"
+        android:id="@+id/Song"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="This is data"
+        android:text="Your top Song is:"
         android:textColor="@color/white"
         android:textSize="18dp"
+        android:padding="20dp"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:textAlignment="center"/>
+
+    <TextView
+        android:id="@+id/Artist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Song"
+        android:text="Your top Artist is:"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        android:padding="20dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"/>
+    <TextView
+        android:id="@+id/Genre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Artist"
+        android:text="Your top Genre is:"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        android:padding="20dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"/>
+    <TextView
+        android:id="@+id/Minutes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Genre"
+        android:text="Your total time listened is:"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        android:padding="20dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"/>
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/LogOutbtn"
+        android:layout_below="@+id/Minutes"
+        android:text="Log Out"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/purple_200"
+        android:layout_centerHorizontal="true"/>
+
+
 
 
 </RelativeLayout>

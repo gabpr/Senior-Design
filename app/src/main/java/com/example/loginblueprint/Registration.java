@@ -27,7 +27,7 @@ public class Registration extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent= new Intent(Registration.this,MainActivity.class);
+                Intent intent= new Intent(Registration.this,UserPage.class);
                 startActivity(intent);
             }
         });
