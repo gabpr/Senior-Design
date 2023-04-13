@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:background="@drawable/gradient"
     android:layout_height="match_parent"
-    tools:context=".UserPage">
+    tools:context=".User">
 
     <TextView
         android:id="@+id/user"
@@ -21,16 +21,17 @@
         android:textColor="@color/white"
         android:textSize="35dp"
         android:textStyle="bold" />
-    <TextView
-        android:id="@+id/data"
-        android:layout_width="match_parent"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/topbtn"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="This is data"
+        android:text="CLICK HERE TO VIEW TOP TRACKS"
         android:textColor="@color/white"
-        android:textSize="18dp"
-        android:layout_centerVertical="true"
+        android:textAlignment="center"
         android:layout_centerHorizontal="true"
-        android:textAlignment="center"/>
+        android:layout_centerVertical="true"
+        android:backgroundTint="@color/purple_200"
+        />
 
 
 </RelativeLayout>

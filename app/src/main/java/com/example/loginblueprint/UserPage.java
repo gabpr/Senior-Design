@@ -1,34 +1,24 @@
 package com.example.loginblueprint;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
-
-
+import com.android.volley.Request;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.gson.annotations.SerializedName;
-
-
-//
-//public class UserPage extends AppCompatActivity {
-//    TopTrack t1 = new TopTrack();
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_user_page);
-//    }
-//}
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
+import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.Response;
+
 public class UserPage extends AppCompatActivity {
-    private static final String TAG = "UserPage";
+  private static final String TAG = "UserPage";
     private LastFmService lastFmService;
     private ListView listView;
 
