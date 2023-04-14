@@ -13,7 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class Registration extends AppCompatActivity {
-    EditText username, password, verifypassword;
+    EditText username, password, verifypassword, firstname, lastname, lastfmusername;
     Button register;
     DBHelper DB;
 
@@ -22,11 +22,15 @@ public class Registration extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
+        firstname = (EditText) findViewById(R.id.firstName);
+        lastname = (EditText) findViewById(R.id.lastName);
+        lastfmusername = (EditText) findViewById(R.id.lastfm);
         username = (EditText) findViewById(R.id.usernamer);
         password = (EditText) findViewById(R.id.passwordr);
         verifypassword = (EditText) findViewById(R.id.verifypass);
+
         register = (Button) findViewById(R.id.registerbtn);
-        DB = new DBHelper(this);
+        DBHelper DB = new DBHelper(this);
 
         final TextView txtr=findViewById(R.id.curruser);
         txtr.setOnClickListener(new View.OnClickListener() {
@@ -41,6 +45,9 @@ public class Registration extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String first = firstname.getText().toString();
+                String last = lastname.getText().toString();
+                String lastfmuser = lastfmusername.getText().toString();
                 String user = username.getText().toString();
                 String pass = password.getText().toString();
                 String verifypass = verifypassword.getText().toString();
@@ -53,7 +60,7 @@ public class Registration extends AppCompatActivity {
                         Boolean checkuser = DB.checkusername(user);
                         if(!checkuser) {
                             // username does not exist, can register username
-                            Boolean insert = DB.insertData(user, pass);
+                            Boolean insert = DB.insertData(user, pass, first, last, lastfmuser);
                             if(insert) {
                                 Toast.makeText(Registration.this, "Registered successfully"
                                         , Toast.LENGTH_SHORT).show();
