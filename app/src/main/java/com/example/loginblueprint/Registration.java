@@ -74,6 +74,7 @@ public class Registration extends AppCompatActivity {
                         Toast.makeText(Registration.this, "Passwords do not match. Try again!", Toast.LENGTH_SHORT).show();
                     }
                 }
+
             }
         });
     }
