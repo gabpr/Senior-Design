@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,7 +20,7 @@ public class Settings extends AppCompatActivity {
         final Button logout = findViewById(R.id.LogOutbtn);
         final Button saveChanges = findViewById(R.id.savechanges);
         EditText newLastFMusername = (EditText) findViewById(R.id.updatelastfmuser);
-
+        ImageButton backButton = (ImageButton) findViewById(R.id.backButton);
         String newLastFM = newLastFMusername.getText().toString();
         SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
         String currentUsername = sharedPreferences.getString("username", ""); // retrieve current username from shared preferences
@@ -43,6 +44,14 @@ public class Settings extends AppCompatActivity {
                 SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
                 String currentUsername = sharedPreferences.getString("username", ""); // retrieve current username from shared preferences
 
+            }
+        });
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Settings.this, UserPage.class);
+                startActivity(intent);
             }
         });
     }
