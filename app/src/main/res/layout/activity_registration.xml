@@ -61,19 +61,24 @@
         android:padding="20dp"
         android:drawableLeft="@drawable/ic_baseline_person_outline_24"
         android:drawablePadding="20dp"/>
+
     <EditText
+        android:id="@+id/passwordr"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/passwordr"
         android:layout_below="@+id/usernamer"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
         android:background="#30ffffff"
-        android:hint="Password"
-        android:textColorHint="@color/white"
-        android:textColor="@color/white"
-        android:layout_margin="10dp"
-        android:padding="20dp"
         android:drawableLeft="@drawable/ic_baseline_key_24"
-        android:drawablePadding="20dp"/>
+        android:drawablePadding="20dp"
+        android:inputType="textPassword"
+        android:hint="Password"
+        android:padding="20dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white" />
 
     <EditText
         android:id="@+id/verifypass"
@@ -87,6 +92,7 @@
         android:background="#30ffffff"
         android:drawableLeft="@drawable/ic_baseline_key_24"
         android:drawablePadding="20dp"
+        android:inputType="textPassword"
         android:hint="Verify Password"
         android:padding="20dp"
         android:textColor="@color/white"
