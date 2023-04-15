@@ -45,7 +45,7 @@ public class Registration extends AppCompatActivity {
                 String verifypass = String.valueOf(verifypassword.getText());
 
                 if(!first.equals("") && !last.equals("") && !lastfmuser.equals("") && !user.equals("")
-                        && !pass.equals("") && !verifypass.equals("")){
+                        && !pass.equals("") && !verifypass.equals("") && pass.equals(verifypass)){
                     Handler handler = new Handler(Looper.getMainLooper());
                     handler.post(new Runnable() {
                         @Override
@@ -86,7 +86,12 @@ public class Registration extends AppCompatActivity {
                     });
                 }
                 else {
-                    Toast.makeText(getApplicationContext(),"All fields are required", Toast.LENGTH_SHORT).show();
+                    if(!pass.equals(verifypass)){
+                        Toast.makeText(getApplicationContext(), "Passwords do not match", Toast.LENGTH_LONG).show();
+                    }
+                    else{
+                        Toast.makeText(getApplicationContext(),"All fields are required", Toast.LENGTH_SHORT).show();
+                    }
                 }
 
             }
