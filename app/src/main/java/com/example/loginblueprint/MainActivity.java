@@ -40,6 +40,10 @@ public class MainActivity extends AppCompatActivity {
                     Boolean checkuserpass = DB.checkusernamepassword(user, pass);
                     if(checkuserpass){
                         // user exists
+                        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("username", user);
+                        editor.apply();
                         Toast.makeText(MainActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getApplicationContext(), UserPage.class);
                         startActivity(intent);

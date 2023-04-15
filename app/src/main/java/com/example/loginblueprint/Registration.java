@@ -62,6 +62,10 @@ public class Registration extends AppCompatActivity {
                             // username does not exist, can register username
                             Boolean insert = DB.insertData(user, pass, first, last, lastfmuser);
                             if(insert) {
+                                SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putString("username", user);
+                                editor.apply();
                                 Toast.makeText(Registration.this, "Registered successfully"
                                         , Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(getApplicationContext(), UserPage.class);
