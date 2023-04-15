@@ -19,7 +19,6 @@ import com.vishnusivadas.advanced_httpurlconnection.PutData;
 public class Registration extends AppCompatActivity {
     EditText username, password, verifypassword, firstname, lastname, lastfmusername;
     Button register;
-//    DBHelper DB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +46,6 @@ public class Registration extends AppCompatActivity {
 
                 if(!first.equals("") && !last.equals("") && !lastfmuser.equals("") && !user.equals("")
                         && !pass.equals("") && !verifypass.equals("")){
-                    //Start ProgressBar first (Set visibility VISIBLE)
                     Handler handler = new Handler(Looper.getMainLooper());
                     handler.post(new Runnable() {
                         @Override
@@ -84,7 +82,6 @@ public class Registration extends AppCompatActivity {
                                     }
                                 }
                             }
-                            //End Write and Read data with URL
                         }
                     });
                 }
@@ -104,54 +101,5 @@ public class Registration extends AppCompatActivity {
 
             }
         });
-
-
-
-//        register.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                String first = firstname.getText().toString();
-//                String last = lastname.getText().toString();
-//                String lastfmuser = lastfmusername.getText().toString();
-//                String user = username.getText().toString();
-//                String pass = password.getText().toString();
-//                String verifypass = verifypassword.getText().toString();
-//
-//                if(user.equals("") || pass.equals(""))
-//                    Toast.makeText(Registration.this, "Please enter all required fields"
-//                            , Toast.LENGTH_SHORT).show();
-//                else{
-//                    if(pass.equals(verifypass)) {
-//                        Boolean checkuser = DB.checkusername(user);
-//                        if(!checkuser) {
-//                            // username does not exist, can register username
-//                            Boolean insert = DB.insertData(user, pass, first, last, lastfmuser);
-//                            if(insert) {
-//                                SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-//                                SharedPreferences.Editor editor = sharedPreferences.edit();
-//                                editor.putString("username", user);
-//                                editor.apply();
-//                                Toast.makeText(Registration.this, "Registered successfully"
-//                                        , Toast.LENGTH_SHORT).show();
-//                                Intent intent = new Intent(getApplicationContext(), UserPage.class);
-//                                startActivity(intent);
-//                            }
-//                            else{
-//                                Toast.makeText(Registration.this, "Registration failed," +
-//                                        " try again!", Toast.LENGTH_SHORT).show();
-//                            }
-//                        }
-//                        else{
-//                            Toast.makeText(Registration.this, "Username already exists. " +
-//                                    "Please sign in or attempt with a different username", Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//                    else{
-//                        Toast.makeText(Registration.this, "Passwords do not match. Try again!", Toast.LENGTH_SHORT).show();
-//                    }
-//                }
-//
-//            }
-//        });
     }
 }
