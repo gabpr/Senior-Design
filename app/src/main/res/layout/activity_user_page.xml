@@ -58,11 +58,11 @@
         android:layout_centerHorizontal="true"
         android:textAlignment="center"/>
     <TextView
-        android:id="@+id/Minutes"
+        android:id="@+id/mins_played_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/Genre"
-        android:text="Your total time listened is:"
+        android:text="Loading..."
         android:textColor="@color/white"
         android:textSize="18dp"
         android:padding="20dp"

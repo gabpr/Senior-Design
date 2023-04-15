@@ -1,5 +1,9 @@
 package com.example.loginblueprint;
+import static com.example.loginblueprint.LastFM.getMinsPlayed;
+
 import androidx.appcompat.app.AppCompatActivity;
+import java.util.List;
+import java.util.Map;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,13 +27,15 @@ import okhttp3.Response;
 
 public class UserPage extends AppCompatActivity {
     private static final String TAG = "UserPage";
-    private LastFmService lastFmService;
     private ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_page);
+        Integer minutesPlayed = getMinsPlayed("anyapop", "7day");
+        TextView minsPlayedTextView = (TextView) findViewById(R.id.mins_played_text_view);
+        minsPlayedTextView.setText("Minutes played: " + minutesPlayed.toString());
         final Button button = findViewById(R.id.LogOutbtn);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,8 +46,6 @@ public class UserPage extends AppCompatActivity {
             }
         });
 
-
-        lastFmService = new LastFmService();
 
         //listView = findViewById(R.id.user);
         /*
