@@ -1,18 +1,15 @@
 package com.example.loginblueprint;
 
-
-//import com.android.volley.toolbox.HttpResponse;
-
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.BasicResponseHandler;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import static android.content.ContentValues.TAG;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -27,6 +24,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
 public class LastFM {
 
     private static final String USER_AGENT = "Mozilla/5.0";
@@ -37,13 +38,15 @@ public class LastFM {
     // payload
     // Outputs:
     // response
-    private static HttpResponse lastfmGet(Map<String, String> payload) throws IOException, InterruptedException {
-        HttpClient client = new DefaultHttpClient();
-        HttpResponse res = null;
+    private static Response lastfmGet(Map<String, String> payload) throws IOException, InterruptedException {
+        OkHttpClient client = new OkHttpClient();
+        Response res = null;
         try{
             String url = "https://ws.audioscrobbler.com/2.0/?" + getParamsString(payload);
-            HttpGet request = new HttpGet(url);
-            res = client.execute(request);
+            Request request = new Request.Builder()
+                    .url(url)
+                    .build();
+            res = client.newCall(request).execute();
             Integer n = 0;
         }
         catch (Exception e) {
@@ -117,11 +120,11 @@ public class LastFM {
             }
             payload.put("page", Integer.toString(pageNum));
             pageNum += 1;
-            HttpResponse response = lastfmGet(payload);
+            Response response = lastfmGet(payload);
             if (response != null) {
-                if (response.getStatusLine().getStatusCode() == 200) {
+                if (response.code() == 200) {
                     try {
-                        String responseBody = new BasicResponseHandler().handleResponse(response);
+                        String responseBody = response.body().string();
                         JSONParser parser = new JSONParser();
                         JSONObject contents = (JSONObject) parser.parse(responseBody);
                         JSONObject artistData = (JSONObject) contents.get("topartists");
@@ -149,7 +152,7 @@ public class LastFM {
                         topArtistPlays.add(0, errorMessage);
                     }
                 } else {
-                    String statusCode = Integer.toString(response.getStatusLine().getStatusCode());
+                    String statusCode = Integer.toString(response.code());
                     Map<String, String> errorMessage = new HashMap<String, String>();
                     errorMessage.put("!Request rejected!, Status Code -", statusCode);
                     topArtistPlays.add(0, errorMessage);
@@ -196,11 +199,11 @@ public class LastFM {
 
             payload.put("page", Integer.toString(pageNum));
             pageNum += 1;
-            HttpResponse response = lastfmGet(payload);
+            Response response = lastfmGet(payload);
             if (response != null) {
-                if (response.getStatusLine().getStatusCode() == 200) {
+                if (response.code() == 200) {
                     try {
-                        String responseBody = new BasicResponseHandler().handleResponse(response);
+                        String responseBody = response.body().string();
                         JSONParser parser = new JSONParser();
                         JSONObject contents = (JSONObject) parser.parse(responseBody);
                         JSONObject trackData = (JSONObject) contents.get("toptracks");
@@ -233,7 +236,7 @@ public class LastFM {
                         topTrackPlays.add(0, errorMessage);
                     }
                 } else {
-                    String statusCode = Integer.toString(response.getStatusLine().getStatusCode());
+                    String statusCode = Integer.toString(response.code());
                     Map<String, String> errorMessage = new HashMap<String, String>();
                     errorMessage.put("!Request rejected!, Status Code -", statusCode);
                     topTrackPlays.add(0, errorMessage);
@@ -270,11 +273,11 @@ public class LastFM {
             payload.put("method", "track.getTopTags");
             payload.put("track", trackName);
             payload.put("artist", artist);
-            HttpResponse response = lastfmGet(payload);
+            Response response = lastfmGet(payload);
             if (response != null) {
-                if (response.getStatusLine().getStatusCode() == 200) {
+                if (response.code() == 200) {
                     try {
-                        String responseBody = new BasicResponseHandler().handleResponse(response);
+                        String responseBody = response.body().string();
                         JSONParser parser = new JSONParser();
                         JSONObject contents = (JSONObject) parser.parse(responseBody);
                         JSONObject tagTemp = (JSONObject) contents.get("toptags");
@@ -303,7 +306,7 @@ public class LastFM {
                         topGenres.put("!Error parsing JSON string! " + error, 0);
                     }
                 } else {
-                    String statusCode = Integer.toString(response.getStatusLine().getStatusCode());
+                    String statusCode = Integer.toString(response.code());
                     topGenres.put("!Request rejected!, Status Code - " + statusCode, 0);
                 }
             }
@@ -347,11 +350,11 @@ public class LastFM {
 
             payload.put("page", Integer.toString(pageNum));
             pageNum += 1;
-            HttpResponse response = lastfmGet(payload);
+            Response response = lastfmGet(payload);
             if (response != null) {
-                if (response.getStatusLine().getStatusCode() == 200) {
+                if (response.code() == 200) {
                     try {
-                        String responseBody = new BasicResponseHandler().handleResponse(response);
+                        String responseBody = response.body().string();
                         JSONParser parser = new JSONParser();
                         JSONObject contents = (JSONObject) parser.parse(responseBody);
                         JSONObject albumData = (JSONObject) contents.get("topalbums");
@@ -382,7 +385,7 @@ public class LastFM {
                         topAlbums.add(0, errorMessage);
                     }
                 } else {
-                    String statusCode = Integer.toString(response.getStatusLine().getStatusCode());
+                    String statusCode = Integer.toString(response.code());
                     Map<String, String> errorMessage = new HashMap<String, String>();
                     errorMessage.put("!Request rejected!, Status Code -", statusCode);
                     topAlbums.add(0, errorMessage);

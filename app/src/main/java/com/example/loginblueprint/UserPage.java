@@ -1,5 +1,6 @@
 package com.example.loginblueprint;
 import static com.example.loginblueprint.LastFM.getMinsPlayed;
+import static com.example.loginblueprint.LastFM.getTopArtistPlays;
 
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.List;
@@ -33,9 +34,32 @@ public class UserPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_page);
-        Integer minutesPlayed = getMinsPlayed("anyapop", "7day");
-        TextView minsPlayedTextView = (TextView) findViewById(R.id.mins_played_text_view);
-        minsPlayedTextView.setText("Minutes played: " + minutesPlayed.toString());
+        List<Map<String, String>> artists = null;
+
+        Map<String, String> topArtist = null;
+        try {
+            artists = getTopArtistPlays("anyapop", "7day", 1);
+            if (!artists.isEmpty()) {
+                topArtist = artists.get(0);
+                TextView topArtistTextView = (TextView) findViewById(R.id.top_artist_text_view);
+                topArtistTextView.setText("Top Artist " + topArtist.get("Artist"));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        if (topArtist != null) {
+            TextView topArtistTextView = (TextView) findViewById(R.id.top_artist_text_view);
+            topArtistTextView.setText("Top Artist " + topArtist.get("Artist"));
+        }
+        else{
+            TextView topArtistTextView = (TextView) findViewById(R.id.top_artist_text_view);
+            topArtistTextView.setText("Top Artist null");
+        }
+
+
         final Button button = findViewById(R.id.LogOutbtn);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
