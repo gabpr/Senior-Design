@@ -1,5 +1,10 @@
 package com.example.loginblueprint;
+import static com.example.loginblueprint.LastFM.getMinsPlayed;
+import static com.example.loginblueprint.LastFM.getTopArtistPlays;
+
 import androidx.appcompat.app.AppCompatActivity;
+import java.util.List;
+import java.util.Map;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,13 +28,37 @@ import okhttp3.Response;
 
 public class UserPage extends AppCompatActivity {
     private static final String TAG = "UserPage";
-    private LastFmService lastFmService;
     private ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_page);
+        List<Map<String, String>> artists = null;
+
+        Map<String, String> topArtist = null;
+        try {
+            artists = getTopArtistPlays("anyapop", "7day", 1);
+            if (!artists.isEmpty()) {
+                topArtist = artists.get(0);
+                TextView topArtistTextView = (TextView) findViewById(R.id.top_artist_text_view);
+                topArtistTextView.setText("Top Artist " + topArtist.get("Artist"));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        if (topArtist != null) {
+            TextView topArtistTextView = (TextView) findViewById(R.id.top_artist_text_view);
+            topArtistTextView.setText("Top Artist " + topArtist.get("Artist"));
+        }
+        else{
+            TextView topArtistTextView = (TextView) findViewById(R.id.top_artist_text_view);
+            topArtistTextView.setText("Top Artist null");
+        }
+        
         final Button settingsbutton = findViewById(R.id.settingsBtn);
         settingsbutton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,9 +67,7 @@ public class UserPage extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
-        lastFmService = new LastFmService();
+        
 
         //listView = findViewById(R.id.user);
         /*
