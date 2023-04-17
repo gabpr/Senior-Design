@@ -61,7 +61,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/settingsBtn"
-        android:layout_below="@+id/Minutes"
+        android:layout_below="@+id/Genre"
+        android:layout_marginTop="80dp"
         android:text="Settings"
 
         android:textColor="@color/white"
