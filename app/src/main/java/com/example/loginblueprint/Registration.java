@@ -68,7 +68,7 @@ public class Registration extends AppCompatActivity {
 
                             // to get url, go to CMD and type "ipconfig"
                             // look for IPv4 Address
-                            PutData putData = new PutData("http://192.168.1.234/LogInRegister/signup.php", "POST", field, data);
+                            PutData putData = new PutData("http://10.145.54.150/LogInRegister/signup.php", "POST", field, data);
                             if (putData.startPut()) {
                                 if (putData.onComplete()) {
                                     String result = putData.getResult();

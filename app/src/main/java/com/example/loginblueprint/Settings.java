@@ -47,6 +47,7 @@ public class Settings extends AppCompatActivity {
                 SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
                 String currentUsername = sharedPreferences.getString("username", ""); // retrieve current username from shared preferences
                 String newLastFM = newLastFMusername.getText().toString();
+
                 if(!newLastFM.equals("")){
                     Handler handler = new Handler(Looper.getMainLooper());
                     handler.post(new Runnable() {
@@ -60,7 +61,7 @@ public class Settings extends AppCompatActivity {
                             data[0] = currentUsername;
                             data[1] = newLastFM;
 
-                            PutData putData = new PutData("http://192.168.1.234/LogInRegister/updateLastFMusername.php", "POST", field, data);
+                            PutData putData = new PutData("http://10.145.54.150/LogInRegister/updateLastFMusername.php", "POST", field, data);
                             if (putData.startPut()) {
                                 if (putData.onComplete()) {
                                     String result = putData.getResult();
