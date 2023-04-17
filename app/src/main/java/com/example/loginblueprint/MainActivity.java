@@ -2,7 +2,9 @@ package com.example.loginblueprint;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -65,6 +67,11 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }
                     });
+                    SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("username", user); // save username
+                    editor.apply(); // apply the changes
+
                 }
                 else {
                     Toast.makeText(getApplicationContext(),"All fields are required", Toast.LENGTH_SHORT).show();

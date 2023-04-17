@@ -66,6 +66,8 @@ public class Registration extends AppCompatActivity {
                             data[3] = pass;
                             data[4] = lastfmuser;
 
+                            // to get url, go to CMD and type "ipconfig"
+                            // look for IPv4 Address
                             PutData putData = new PutData("http://192.168.1.234/LogInRegister/signup.php", "POST", field, data);
                             if (putData.startPut()) {
                                 if (putData.onComplete()) {
@@ -84,6 +86,10 @@ public class Registration extends AppCompatActivity {
                             }
                         }
                     });
+                    SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("username", user); // save username
+                    editor.apply(); // apply the changes
                 }
                 else {
                     if(!pass.equals(verifypass)){

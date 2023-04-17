@@ -30,6 +30,10 @@ public class Settings extends AppCompatActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("username", ""); // set the value of "username" to empty string
+                editor.apply(); // apply the changes
                 Intent intent = new Intent(Settings.this, MainActivity.class);
                 startActivity(intent);
 
