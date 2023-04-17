@@ -58,18 +58,16 @@ public class UserPage extends AppCompatActivity {
             TextView topArtistTextView = (TextView) findViewById(R.id.top_artist_text_view);
             topArtistTextView.setText("Top Artist null");
         }
-
-
-        final Button button = findViewById(R.id.LogOutbtn);
-        button.setOnClickListener(new View.OnClickListener() {
+        
+        final Button settingsbutton = findViewById(R.id.settingsBtn);
+        settingsbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(UserPage.this, MainActivity.class);
+                Intent intent = new Intent(UserPage.this, Settings.class);
                 startActivity(intent);
-
             }
         });
-
+        
 
         //listView = findViewById(R.id.user);
         /*
